@@ -1,9 +1,14 @@
 import { tool } from "ai";
 import { z } from "zod";
 import SeiMCPClient, { QueryParser, MCPConnectionError, MCPRequestError, MCPTimeoutError } from "@/lib/sei-mcp-client";
+import { createMCPConfig } from "@/lib/config";
 
 // Create MCP client instance
 const seiMCPKit = new SeiMCPClient();
+
+// Debug logging for environment variables
+console.log('[DEBUG] MCP_SERVER_URL env var:', process.env.MCP_SERVER_URL);
+console.log('[DEBUG] MCP config server URL:', createMCPConfig().server.url);
 
 export const seiBlockchainAnalyzer = tool({
   description: "Comprehensive Sei blockchain analysis tool that can handle wallet balance checks, NFT analysis, token flow information, and transaction explanations through natural language queries",
