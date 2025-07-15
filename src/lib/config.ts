@@ -85,7 +85,7 @@ export function createMCPConfig(): MCPClientConfig {
   };
 
   const serverConfig: MCPServerConfig = {
-    url: getEnvVar('MCP_SERVER_URL', 'http://localhost:3004'),
+    url: getEnvVar('MCP_SERVER_URL', 'http://localhost:3004').replace(/\/$/, ''), // Remove trailing slash
     timeout: getEnvNumber('MCP_SERVER_TIMEOUT', 30000),
     retryAttempts: getEnvNumber('MCP_CONNECTION_RETRY_ATTEMPTS', 3),
     retryDelay: getEnvNumber('MCP_CONNECTION_RETRY_DELAY', 1000)
