@@ -201,7 +201,7 @@ const chatBubbleMessageVariants = cva("", {
 });
 
 interface ChatBubbleMessageProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onDrag' | 'onDragStart' | 'onDragEnd' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop' | 'onAnimationStart' | 'onAnimationEnd'>,
     VariantProps<typeof chatBubbleMessageVariants> {
   isLoading?: boolean;
   animate?: boolean;
@@ -252,7 +252,7 @@ ChatBubbleMessage.displayName = "ChatBubbleMessage";
 
 // ChatBubbleTimestamp
 interface ChatBubbleTimestampProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onDrag' | 'onDragStart' | 'onDragEnd' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop' | 'onAnimationStart' | 'onAnimationEnd'> {
   timestamp: string;
 }
 
@@ -303,7 +303,7 @@ const ChatBubbleAction: React.FC<ChatBubbleActionProps> = ({
 );
 
 interface ChatBubbleActionWrapperProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onDrag' | 'onDragStart' | 'onDragEnd' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop' | 'onAnimationStart' | 'onAnimationEnd'> {
   variant?: "sent" | "received";
   className?: string;
 }
