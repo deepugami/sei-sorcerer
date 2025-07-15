@@ -349,7 +349,11 @@ async function handleGeneralBlockchainQuery(query: string): Promise<string> {
 // New function to handle Gemini API queries
 async function handleGeminiQuery(query: string): Promise<string> {
   try {
-    const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAvt9Af52G9Ol-J6dWjbpkFx-bslYKHtKw', {
+    const apiKey = process.env.GOOGLE_GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error('GOOGLE_GEMINI_API_KEY environment variable is not set');
+    }
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
