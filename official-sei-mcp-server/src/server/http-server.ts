@@ -69,13 +69,41 @@ app.post("/api/mcp", async (req: Request, res: Response) => {
           try {
             // Try multiple API endpoints for better accuracy
             let response, data;
+            let apiError = null;
+            
             try {
+              console.log(`[BALANCE] Trying primary REST API for ${params.address}`);
               response = await fetch(`https://rest.sei-apis.com/cosmos/bank/v1beta1/balances/${params.address}`);
+              
+              if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+              }
+              
               data = await response.json();
+              console.log(`[BALANCE] Primary API response:`, data);
             } catch (primaryError) {
+              apiError = primaryError;
+              console.log(`[BALANCE] Primary API failed, trying fallback for ${params.address}:`, primaryError);
+              
               // Fallback to Polkachu API
-              response = await fetch(`https://sei-api.polkachu.com/cosmos/bank/v1beta1/balances/${params.address}`);
-              data = await response.json();
+              try {
+                response = await fetch(`https://sei-api.polkachu.com/cosmos/bank/v1beta1/balances/${params.address}`);
+                
+                if (!response.ok) {
+                  throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                data = await response.json();
+                console.log(`[BALANCE] Fallback API response:`, data);
+              } catch (fallbackError) {
+                console.error(`[BALANCE] Both APIs failed for ${params.address}:`, { primaryError, fallbackError });
+                throw new Error(`Both REST APIs failed. Primary: ${primaryError}. Fallback: ${fallbackError}`);
+              }
+            }
+            
+            // Validate API response structure
+            if (!data || !Array.isArray(data.balances)) {
+              throw new Error(`Invalid API response structure: ${JSON.stringify(data)}`);
             }
             
             // Find SEI balance with higher precision
@@ -88,22 +116,17 @@ app.post("/api/mcp", async (req: Request, res: Response) => {
               wei: seiBalance ? seiBalance.amount : '0',
               ether: balanceInSei
             };
-            console.error(`REST API Balance result for ${params.address}:`, result);
+            console.log(`[BALANCE] Final balance result for ${params.address}:`, result);
           } catch (restError) {
-            console.error(`REST API failed for ${params.address}, fallback to EVM:`, restError);
-            // Fallback to original EVM method with address conversion
-            const { getBalance } = await import('../core/services/balance.js');
-            const balance = await getBalance(params.address, params.network || 'sei');
-            result = {
-              address: params.address,
-              network: params.network || 'sei',
-              wei: balance.wei.toString(),
-              ether: balance.sei
-            };
-            console.error(`EVM Balance result for ${params.address}:`, result);
+            console.error(`[BALANCE] REST API completely failed for ${params.address}:`, restError);
+            
+            // Do NOT fall back to EVM method for sei1 addresses since the address conversion is fake
+            // Instead, return an error with helpful information
+            throw new Error(`Unable to fetch balance for sei1 address ${params.address}. REST API error: ${restError instanceof Error ? restError.message : 'Unknown error'}. Please try again later or check if the address is valid.`);
           }
         } else {
           // For 0x addresses, use the EVM method directly
+          console.log(`[BALANCE] Using EVM method for 0x address: ${params.address}`);
           const { getBalance } = await import('../core/services/balance.js');
           const balance = await getBalance(params.address, params.network || 'sei');
           result = {
@@ -112,7 +135,7 @@ app.post("/api/mcp", async (req: Request, res: Response) => {
             wei: balance.wei.toString(),
             ether: balance.sei
           };
-          console.error(`EVM Balance result for ${params.address}:`, result);
+          console.log(`[BALANCE] EVM balance result for ${params.address}:`, result);
         }
         break;
       }
