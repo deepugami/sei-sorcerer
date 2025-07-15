@@ -101,7 +101,7 @@ export default function ChatBottombar({
         }
       }} className="relative w-full md:px-4">
         <motion.div 
-          className={`mx-auto flex items-center rounded-full border border-[#E5E5E9] bg-[#ECECF0] py-2 pr-2 pl-6 ${isGeminiMode ? 'gemini-border' : ''} ${isToolInProgress ? 'bg-purple-50 border-purple-200' : ''}`}
+          className={`mx-auto flex items-center rounded-full border bg-background/90 py-2 pr-2 pl-6 shadow-sm backdrop-blur-sm ${isGeminiMode ? 'gemini-border' : 'border-border'} ${isToolInProgress ? 'bg-purple-50 border-purple-200' : ''}`}
           animate={shouldShake ? { x: [-10, 10, -10, 10, 0] } : {}}
           transition={{ duration: 0.4 }}
         >
@@ -124,7 +124,7 @@ export default function ChatBottombar({
             placeholder={
               isToolInProgress ? 'Sorcerer is weaving magic... ✨' : 'Ask me anything'
             }
-            className="text-md w-full border-none bg-transparent text-black placeholder:text-gray-500 focus:outline-none"
+            className="text-md w-full border-none bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none"
             disabled={isToolInProgress || isLoading}
           />
 

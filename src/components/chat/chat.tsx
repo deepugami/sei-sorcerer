@@ -372,15 +372,15 @@ const Chat = () => {
   return (
     <div className="relative h-screen overflow-hidden">
       {/* Top-left Set Wallet Widget */}
-      <div className="absolute top-6 left-8 z-51 flex flex-col items-start justify-start gap-2">
+      <div className="absolute top-6 left-8 z-[60] flex flex-col items-start justify-start gap-2">
         <SetWalletModal 
           onWalletSet={handleWalletSet}
           onWalletReset={handleWalletReset}
         />
         {/* Wallet Status Indicator */}
         {currentWallet && (
-          <div className="bg-green-100 border border-green-300 rounded-lg px-2 py-1 text-xs">
-            <span className="text-green-700 font-medium">
+          <div className="bg-accent border border-border rounded-lg px-2 py-1 text-xs">
+            <span className="text-accent-foreground font-medium">
               Wallet: {currentWallet.slice(0, 6)}...{currentWallet.slice(-4)}
             </span>
           </div>
@@ -388,16 +388,16 @@ const Chat = () => {
       </div>
 
       {/* Top-right Controls */}
-      <div className="absolute top-6 right-8 z-51 flex flex-col-reverse items-center justify-center gap-1 md:flex-row">
+      <div className="absolute top-6 right-8 z-[60] flex flex-col-reverse items-center justify-center gap-1 md:flex-row">
         <WelcomeModal
           trigger={
-            <div className="hover:bg-accent cursor-pointer rounded-2xl px-3 py-1.5">
-              <Info className="text-accent-foreground h-8" />
+            <div className="hover:bg-accent cursor-pointer rounded-2xl px-3 py-1.5 bg-background/50 backdrop-blur-sm border border-border/50">
+              <Info className="text-foreground h-8" />
             </div>
           }
         />
-        <div className="flex items-center gap-3 pt-2 bg-white/80 backdrop-blur-sm rounded-lg px-3 py-2 border border-border/50">
-          <div className="text-sm font-medium text-secondary-foreground">
+        <div className="flex items-center gap-3 pt-2 bg-background/90 backdrop-blur-sm rounded-lg px-3 py-2 border border-border shadow-sm">
+          <div className="text-sm font-medium text-foreground">
             {isGeminiMode ? 'AI Mode' : 'SEI MCP Mode'}
           </div>
           <Switch
@@ -409,11 +409,7 @@ const Chat = () => {
 
       {/* Fixed Avatar Header with Gradient */}
       <div
-        className="fixed top-0 right-0 left-0 z-50"
-        style={{
-          background:
-            'linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 30%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%)',
-        }}
+        className="fixed top-0 right-0 left-0 z-50 bg-gradient-to-b from-background via-background/95 to-background/80"
       >
         <div
           className={`transition-all duration-300 ease-in-out ${hasActiveTool ? 'pt-4 pb-0' : 'pt-6 pb-0'}`}
@@ -504,7 +500,7 @@ const Chat = () => {
         </div>
 
         {/* Fixed Bottom Bar */}
-        <div ref={bottomBarRef} className="fixed bottom-0 left-0 right-0 bg-white z-50">
+        <div ref={bottomBarRef} className="fixed bottom-0 left-0 right-0 bg-background z-50">
           <div className="container mx-auto max-w-3xl px-2 md:px-0">
             <div className="relative flex flex-col items-center gap-1 py-1">
               <HelperBoost submitQuery={submitQuery} setInput={setInput} />

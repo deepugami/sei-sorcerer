@@ -41,8 +41,8 @@ class ChatErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundar
       return (
         <div className="flex h-screen items-center justify-center">
           <div className="text-center p-8 max-w-md">
-            <h2 className="text-2xl font-bold mb-4">Oops! Something went wrong</h2>
-            <p className="text-gray-600 mb-6">
+            <h2 className="text-2xl font-bold mb-4 text-foreground">Oops! Something went wrong</h2>
+            <p className="text-muted-foreground mb-6">
               The Sei Sorcerer encountered an unexpected error. Don't worry, we can try again!
             </p>
             <div className="space-y-3">
@@ -59,10 +59,10 @@ class ChatErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundar
             </div>
             {this.state.error && (
               <details className="mt-4 text-left">
-                <summary className="cursor-pointer text-sm text-gray-500 hover:text-gray-700">
+                <summary className="cursor-pointer text-sm text-muted-foreground hover:text-foreground">
                   Technical Details
                 </summary>
-                <pre className="mt-2 text-xs text-red-600 bg-red-50 p-2 rounded overflow-auto">
+                <pre className="mt-2 text-xs text-destructive bg-destructive/10 p-2 rounded overflow-auto">
                   {this.state.error.toString()}
                 </pre>
               </details>

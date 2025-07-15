@@ -92,7 +92,7 @@ export default function Home() {
       <div className="absolute top-6 left-6 z-20 flex items-center gap-3">
         <button
           onClick={() => goToChat('What makes the Sei blockchain special for DeFi?')}
-          className="cursor-pointer relative flex items-center gap-2 rounded-full border bg-white/30 px-4 py-1.5 text-sm font-medium text-black shadow-md backdrop-blur-lg transition hover:bg-white/60 dark:border-white dark:text-white dark:hover:bg-neutral-800"
+          className="cursor-pointer relative flex items-center gap-2 rounded-full border border-border bg-background/30 px-4 py-1.5 text-sm font-medium text-foreground shadow-md backdrop-blur-lg transition hover:bg-background/60 dark:border-border dark:text-foreground dark:hover:bg-accent"
         >
           {/* Purple magic pulse dot */}
           <span className="relative flex h-2 w-2">
@@ -167,14 +167,14 @@ export default function Home() {
           }}
           className="relative w-full max-w-lg"
         >
-          <div className="mx-auto flex items-center rounded-full border border-neutral-200 bg-white/30 py-2.5 pr-2 pl-6 backdrop-blur-lg transition-all hover:border-neutral-300 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600">
+          <div className="mx-auto flex items-center rounded-full border border-border bg-background/30 py-2.5 pr-2 pl-6 backdrop-blur-lg transition-all hover:border-border/80 dark:border-border dark:bg-card dark:hover:border-border/60">
             <input
               ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Cast your blockchain query..."
-              className="w-full border-none bg-transparent text-base text-neutral-800 placeholder:text-neutral-500 focus:outline-none dark:text-neutral-200 dark:placeholder:text-neutral-500"
+              className="w-full border-none bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none dark:text-foreground dark:placeholder:text-muted-foreground"
             />
             <button
               type="submit"
@@ -194,9 +194,9 @@ export default function Home() {
               key={key}
               onClick={() => goToChat(questions[key])}
               variant="outline"
-              className="shadow-none border-border hover:bg-border/30 aspect-square w-full cursor-pointer rounded-2xl border bg-white/30 py-4 backdrop-blur-lg transition-all duration-200 hover:scale-105 active:scale-95 md:py-6"
+              className="shadow-none border-border hover:bg-border/30 aspect-square w-full cursor-pointer rounded-2xl border bg-background/30 py-4 backdrop-blur-lg transition-all duration-200 hover:scale-105 active:scale-95 md:py-6"
             >
-              <div className="flex h-full flex-col items-center justify-center gap-1 text-gray-700">
+              <div className="flex h-full flex-col items-center justify-center gap-1 text-foreground">
                 <Icon size={18} strokeWidth={2} color={color} />
                 <span className="text-xs font-medium">{key}</span>
               </div>

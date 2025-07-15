@@ -215,7 +215,7 @@ iframe[src*="spline.design"] {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: #ECECF0;
+  background: hsl(var(--background));
   border-radius: 48px;
   z-index: -1;
 }

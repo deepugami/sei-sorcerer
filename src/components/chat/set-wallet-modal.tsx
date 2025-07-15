@@ -137,7 +137,7 @@ export default function SetWalletModal({ trigger, onWalletSet, onWalletReset }: 
     <Button
       variant="outline"
       size="sm"
-      className="flex items-center gap-2 bg-white/80 backdrop-blur-sm hover:bg-white/90 border border-border/50"
+      className="flex items-center gap-2 bg-background/80 backdrop-blur-sm hover:bg-accent border border-border"
     >
       <Wallet className="h-4 w-4" />
       Set Wallet
@@ -160,16 +160,16 @@ export default function SetWalletModal({ trigger, onWalletSet, onWalletReset }: 
         <div className="space-y-4">
           {/* Current Wallet Display */}
           {currentWallet && (
-            <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+            <div className="p-3 bg-accent/50 rounded-lg border border-border">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-green-800 dark:text-green-200">
+                  <p className="text-sm font-medium text-foreground">
                     Current Wallet
                   </p>
-                  <p className="text-xs text-green-600 dark:text-green-300 font-mono break-all">
+                  <p className="text-xs text-muted-foreground font-mono break-all">
                     {currentWallet.slice(0, 8)}...{currentWallet.slice(-6)}
                   </p>
-                  <p className="text-xs text-green-500 dark:text-green-400 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     {validateWalletAddress(currentWallet).type}
                   </p>
                 </div>
@@ -186,7 +186,7 @@ export default function SetWalletModal({ trigger, onWalletSet, onWalletReset }: 
                     variant="ghost"
                     size="sm"
                     onClick={handleReset}
-                    className="h-8 w-8 p-0 text-red-600 hover:text-red-700 hover:bg-red-50"
+                    className="h-8 w-8 p-0 text-destructive hover:text-destructive/90 hover:bg-destructive/10"
                   >
                     <X className="h-3 w-3" />
                   </Button>
@@ -209,11 +209,11 @@ export default function SetWalletModal({ trigger, onWalletSet, onWalletReset }: 
             
             {/* Validation Feedback */}
             {isValidating && (
-              <p className="text-xs text-gray-500">Validating...</p>
+              <p className="text-xs text-muted-foreground">Validating...</p>
             )}
             
             {validation && !isValidating && (
-              <div className={`text-xs ${validation.isValid ? 'text-green-600' : 'text-red-600'}`}>
+              <div className={`text-xs ${validation.isValid ? 'text-foreground' : 'text-destructive'}`}>
                 {validation.isValid ? (
                   <div className="flex items-center gap-1">
                     <Check className="h-3 w-3" />
@@ -227,7 +227,7 @@ export default function SetWalletModal({ trigger, onWalletSet, onWalletReset }: 
           </div>
 
           {/* Supported Formats Info */}
-          <div className="text-xs text-gray-500 space-y-1">
+          <div className="text-xs text-muted-foreground space-y-1">
             <p className="font-medium">Supported wallet formats:</p>
             <ul className="list-disc list-inside space-y-0.5 ml-2">
               <li><strong>Sei Native:</strong> sei1abc...def123 (Cosmos format)</li>
@@ -246,7 +246,7 @@ export default function SetWalletModal({ trigger, onWalletSet, onWalletReset }: 
             <Button
               onClick={handleSave}
               disabled={!validation?.isValid}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               {currentWallet ? 'Update Wallet' : 'Set Wallet'}
             </Button>

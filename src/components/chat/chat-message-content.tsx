@@ -97,39 +97,39 @@ export default function ChatMessageContent({
                 remarkPlugins={[remarkGfm]}
                 components={{
                   p: ({ children }) => (
-                    <p className="break-words whitespace-pre-wrap text-gray-800 dark:text-gray-200">
+                    <p className="break-words whitespace-pre-wrap text-foreground">
                       {children}
                     </p>
                   ),
                   strong: ({ children }) => (
-                    <strong className="font-semibold text-gray-900 dark:text-gray-100">
+                    <strong className="font-semibold text-foreground">
                       {children}
                     </strong>
                   ),
                   em: ({ children }) => (
-                    <em className="italic text-gray-700 dark:text-gray-300">
+                    <em className="italic text-muted-foreground">
                       {children}
                     </em>
                   ),
                   ul: ({ children }) => (
-                    <ul className="my-4 list-disc pl-6 text-gray-800 dark:text-gray-200">{children}</ul>
+                    <ul className="my-4 list-disc pl-6 text-foreground">{children}</ul>
                   ),
                   ol: ({ children }) => (
-                    <ol className="my-4 list-decimal pl-6 text-gray-800 dark:text-gray-200">{children}</ol>
+                    <ol className="my-4 list-decimal pl-6 text-foreground">{children}</ol>
                   ),
                   li: ({ children }) => <li className="my-1">{children}</li>,
                   h1: ({ children }) => (
-                    <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-3">
+                    <h1 className="text-xl font-semibold text-foreground mt-6 mb-3">
                       {children}
                     </h1>
                   ),
                   h2: ({ children }) => (
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mt-5 mb-2">
+                    <h2 className="text-lg font-semibold text-foreground mt-5 mb-2">
                       {children}
                     </h2>
                   ),
                   h3: ({ children }) => (
-                    <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-2">
+                    <h3 className="text-base font-semibold text-foreground mt-4 mb-2">
                       {children}
                     </h3>
                   ),
