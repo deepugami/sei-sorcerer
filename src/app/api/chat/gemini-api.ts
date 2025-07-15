@@ -77,7 +77,11 @@ export async function handleGeminiQuery(query: string, requestId?: string): Prom
 
   try {
     console.log('[GEMINI] Making new API request for query:', query.substring(0, 50) + '...');
-    const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAvt9Af52G9Ol-J6dWjbpkFx-bslYKHtKw', {
+    const apiKey = process.env.GOOGLE_GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error('GOOGLE_GEMINI_API_KEY environment variable is not set');
+    }
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

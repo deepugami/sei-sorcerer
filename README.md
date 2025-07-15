@@ -146,6 +146,72 @@ The AI assistant maintains a knowledgeable and educational approach:
 - Graceful degradation when services are unavailable
 - Real-time status monitoring and feedback
 
+## Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+# Required: Google Gemini API Key
+GOOGLE_GEMINI_API_KEY=your_gemini_api_key_here
+
+# Optional: Blockchain API Keys
+SEI_API_KEY=your_sei_api_key_here
+COINGECKO_API_KEY=your_coingecko_api_key_here
+
+# Development: MCP Server URL
+MCP_SERVER_URL=http://localhost:3004
+```
+
+## Deployment
+
+### Vercel Deployment (Frontend)
+
+1. **Connect to Vercel**:
+   - Visit [Vercel](https://vercel.com) and connect your GitHub repository
+   - Import the `sei-sorcerer` project
+
+2. **Configure Environment Variables**:
+   - In Vercel dashboard, go to Project Settings → Environment Variables
+   - Add the required environment variables:
+     - `GOOGLE_GEMINI_API_KEY`: Your Google Gemini API key
+     - `SEI_API_KEY`: (Optional) Sei blockchain API key
+     - `COINGECKO_API_KEY`: (Optional) CoinGecko API key
+
+3. **Deploy**:
+   - Vercel will automatically deploy your Next.js frontend
+   - The app will be available at your Vercel URL
+
+### MCP Server Deployment
+
+The MCP server needs to be deployed separately. Options include:
+
+#### Option 1: Railway
+```bash
+# In the official-sei-mcp-server directory
+npm install
+# Deploy to Railway following their Node.js deployment guide
+```
+
+#### Option 2: Heroku
+```bash
+# In the official-sei-mcp-server directory
+npm install
+# Create Procfile: web: npm run start:http
+# Deploy following Heroku Node.js guide
+```
+
+#### Option 3: DigitalOcean App Platform
+- Connect your GitHub repository
+- Configure build command: `cd official-sei-mcp-server && npm install`
+- Configure run command: `cd official-sei-mcp-server && npm run start:http`
+
+### Production Considerations
+
+1. **MCP Server URL**: Update the frontend to point to your deployed MCP server URL
+2. **CORS Configuration**: Ensure the MCP server allows requests from your Vercel domain
+3. **API Keys**: Store all API keys securely in your deployment platform's environment variables
+4. **Rate Limiting**: Consider implementing additional rate limiting for production use
+
 ## Available Scripts
 
 - `npm run dev` - Start development server
@@ -192,5 +258,3 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - Advanced analytics: In active development
 
 ---
-
-For questions, issues, or contributions, please refer to the project's GitHub repository.
