@@ -174,6 +174,7 @@ MCP_SERVER_URL=http://localhost:3004
    - In Vercel dashboard, go to Project Settings → Environment Variables
    - Add the required environment variables:
      - `GOOGLE_GEMINI_API_KEY`: Your Google Gemini API key
+     - `MCP_SERVER_URL`: Your deployed MCP server URL (e.g., `https://sei-sorcerer.onrender.com`)
      - `SEI_API_KEY`: (Optional) Sei blockchain API key
      - `COINGECKO_API_KEY`: (Optional) CoinGecko API key
 

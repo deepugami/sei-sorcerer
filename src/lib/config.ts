@@ -103,7 +103,7 @@ export function createMCPConfig(): MCPClientConfig {
       maxRequestsPerMinute: getEnvNumber('MAX_REQUESTS_PER_MINUTE', 60),
       cacheTTL: getEnvNumber('REQUEST_CACHE_TTL', 30000)
     },
-    debug: getEnvBoolean('DEBUG_MCP_CLIENT', false),
+    debug: true, // Force debug mode to troubleshoot
     logLevel: (getEnvVar('LOG_LEVEL', 'info') as 'debug' | 'info' | 'warn' | 'error')
   };
 }
