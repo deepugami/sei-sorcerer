@@ -20,13 +20,11 @@ Sei Sorcerer is an AI-powered interface that allows users to interact with block
 - Multi-step DeFi transaction breakdown and explanation
 - Smart contract interaction analysis
 - Educational explanations suitable for all technical levels
-- Gas optimization insights and recommendations
 
 ### Blockchain Intelligence
 - Deep insights into Sei blockchain's unique features
-- DeFi ecosystem analysis and mapping
+- DeFi ecosystem analysis
 - Real-time network performance metrics
-- Protocol interaction visualization
 
 ## Technical Architecture
 
